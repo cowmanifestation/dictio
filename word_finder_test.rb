@@ -56,16 +56,6 @@ describe WordFinder do
     end
   end
 
-  describe '#find_words_without' do
-    it "should return all words without specified letter" do
-      @finder.find_words_without('c', 'a').must_equal(%w[bcd cde cherry cheese])
-    end
-
-    it "should work with an empty 'with' pattern" do
-      @finder.find_words_without('', 'c').must_equal(%w[def efg apple])
-    end
-  end
-
   describe '#find_words_ending_with' do
     it "should return all words ending with a certain letter" do
       @finder.find_words_ending_with('e').must_equal(%w[cde apple cheese ache gouache])
@@ -73,6 +63,16 @@ describe WordFinder do
 
     it "should return all words ending with a certain pattern" do
       @finder.find_words_ending_with('he').must_equal(%w[ache gouache])
+    end
+  end
+
+  describe '#find_words_without' do
+    it "should return all words without specified letter" do
+      @finder.find_words_without('c', 'a').must_equal(%w[bcd cde cherry cheese])
+    end
+
+    it "should work with an empty 'with' pattern" do
+      @finder.find_words_without('', 'c').must_equal(%w[def efg apple])
     end
   end
 
