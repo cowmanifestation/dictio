@@ -19,6 +19,10 @@ describe WordFinder do
       it "returns all words that begin with supplied letter" do
         @finder.find_words_starting_with('c').must_equal(%w[cde cherry cheese])
       end
+
+      it "should return nothing if there are no matches" do
+        @finder.find_words_starting_with('x').must_equal([])
+      end
     end
 
     describe 'with a pattern' do
@@ -36,10 +40,34 @@ describe WordFinder do
     it 'returns all of words that contain supplied pattern' do
       @finder.find_pattern('che').must_equal(%w[cherry cheese ache gouache])
     end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_pattern('axyz').must_equal([])
+    end
+  end
+
+  describe '#find_words_containing' do
+    it "should return all words containing all supplied letters" do
+      @finder.find_words_containing('ca').must_equal(%w[abc arc ache gouache])
+    end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_words_containing('acx').must_equal([])
+    end
+  end
+
+  describe '#without' do
+    it "should return all words without specified letter" do
+      @finder.find_pattern_without('c', 'a').must_equal(%w[bcd cde cherry cheese])
+    end
+
+    it "should work with an empty 'with' pattern" do
+      @finder.find_pattern_without('', 'c').must_equal(%w[def efg apple])
+    end
   end
 
   ## TODO ##
-  # it "should return all words starting with the pattern"
-  # it "should return all words containing all supplied letters"
+  # describe '#ends_with'
   # it "should return words in order according to length, shortest first"
+  # it "should work with the real list"
 end
