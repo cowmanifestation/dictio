@@ -33,9 +33,13 @@ class WordFinder
     result_list
   end
 
-  def find_pattern_without(pattern, omission)
+  def find_words_without(pattern, omission)
     p = self.find_pattern(pattern)
     p.reject {|w| w =~ /#{omission}/ || w.empty? }
+  end
+
+  def find_words_ending_with(pattern)
+    self.list.scan(/\w*#{pattern}$/)
   end
 
 #  Hmmm...how could this work?
