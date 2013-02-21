@@ -77,7 +77,6 @@ describe WordFinder do
   end
 
   ## TODO ##
-  # find_words_containing takes for EVER with the real list!!! Find out why and fix it.
   # describe '#find_words_of_length'
   # it "should not return words of more than (?) letters"
   # it "should return words in order according to length, shortest first"
