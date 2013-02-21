@@ -48,5 +48,6 @@ class WordFinder
 #    params[:starting_with]
 #    params[:containing_letters]
 #    params[:without]
+#    params[:length]
 #  end
 end
