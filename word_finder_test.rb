@@ -76,8 +76,15 @@ describe WordFinder do
     end
   end
 
+  describe '#find_words_of_length' do
+    it "should return words of the required length" do
+      @finder.find_words_of_length(3).must_equal(%w[abc bcd cde def efg arc])
+      @finder.find_words_of_length(6).must_equal(%w[cherry cheese])
+      @finder.find_words_of_length(10).must_equal([])
+    end
+  end
+
   ## TODO ##
-  # describe '#find_words_of_length'
   # it "should not return words of more than (?) letters"
   # it "should return words in order according to length, shortest first"
   # it "should work with the real list"

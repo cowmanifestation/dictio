@@ -34,6 +34,10 @@ class WordFinder
     p.reject {|w| w =~ /#{omission}/ || w.empty? }
   end
 
+  def find_words_of_length(l)
+    self.list.scan(/^\w{#{l}}$/)
+  end
+
 #  Hmmm...how could this work?
 #  def find_pattern(params = {})
 #    params[:with]
