@@ -34,8 +34,15 @@ class WordFinder
     p.reject {|w| w =~ /#{omission}/ || w.empty? }
   end
 
-  def find_words_of_length(l)
-    self.list.scan(/^\w{#{l}}$/)
+  def find_words_of_length(l, options = {})
+    if options[:less_than]
+      self.list.scan(/^\w{1,#{l}}$/)
+    elsif options[:more_than]
+      # TODO - how long is the longest word?
+      self.list.scan(/^\w{#{l},26}$/)
+    else
+      self.list.scan(/^\w{#{l}}$/)
+    end
   end
 
 #  Hmmm...how could this work?
