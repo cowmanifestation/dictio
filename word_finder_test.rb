@@ -92,6 +92,16 @@ describe WordFinder do
     end
   end
 
+  describe '#find_words' do
+    it "should find words with one supplied parameter" do
+      @finder.find_words(:length => 4).must_equal(%w[ache])
+    end
+
+    it "should work with two supplied parameters" do
+      @finder.find_words(containing: 'ca', ending_with: 'he').must_equal(%w[ache gouache])
+    end
+  end
+
   ## TODO ##
   # it "should not return words of more than (?) letters" (only a certain number fit on the board)
   # it "should return words in order according to length, shortest first"
