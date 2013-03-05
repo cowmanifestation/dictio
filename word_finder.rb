@@ -36,15 +36,16 @@ class WordFinder
 
   # There must be a better way to do this:
   # You have to enter a blank options hash in order to enter an alternate list.
-  def find_words_of_length(l, options = {}, list = self.list)
-    if options[:less_than]
-      list.scan(/^\w{1,#{l}}$/)
-    elsif options[:more_than]
-      # TODO - how long is the longest word?
-      list.scan(/^\w{#{l},26}$/)
-    else
-      list.scan(/^\w{#{l}}$/)
-    end
+  def find_words_of_length(l, list = self.list) # options = {},
+    list.scan(/^\w{#{l}}$/)
+  end
+
+  def find_words_longer_than(length)
+    list.scan(/^\w{#{length},26}$/)
+  end
+
+  def find_words_shorter_than(length, list = self.list)
+    list.scan(/^\w{1,#{length}}$/)
   end
 
   def find_words(params = {})

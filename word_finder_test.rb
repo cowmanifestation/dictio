@@ -82,13 +82,17 @@ describe WordFinder do
       @finder.find_words_of_length(6).must_equal(%w[cherry cheese])
       @finder.find_words_of_length(10).must_equal([])
     end
+  end
 
-    it "should return all words of up to required length with ':less_than' option" do
-      @finder.find_words_of_length(4, :less_than => true).must_equal(%w[abc bcd cde def efg arc ache])
+  describe "#find_words_longer_than" do
+    it "should return all words at least the specified length" do
+      @finder.find_words_longer_than(4).must_equal(%w[cherry apple cheese ache gouache])
     end
+  end
 
-    it "should return all words at least required length with ':more_than' option" do
-      @finder.find_words_of_length(4, :more_than => true).must_equal(%w[cherry apple cheese ache gouache])
+  describe "#find_words_shorter_than" do
+    it "should return all words of up to specified length" do
+      @finder.find_words_shorter_than(4).must_equal(%w[abc bcd cde def efg arc ache])
     end
   end
 
