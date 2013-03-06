@@ -36,18 +36,18 @@ class WordFinder
   #   # p.reject {|w| w =~ /#{omission}/ || w.empty? }
   # end
 
-  # There must be a better way to do this:
-  # You have to enter a blank options hash in order to enter an alternate list.
   def find_words_of_length(l, list = self.list) # options = {},
     list.scan(/^\w{#{l}}$/)
   end
 
-  def find_words_longer_than(length)
-    list.scan(/^\w{#{length},26}$/)
+  # TODO "#at_least" and "#at_most" methods?
+  
+  def find_words_longer_than(length, list = self.list)
+    list.scan(/^\w{#{length + 1},26}$/)
   end
 
   def find_words_shorter_than(length, list = self.list)
-    list.scan(/^\w{1,#{length}}$/)
+    list.scan(/^\w{1,#{length - 1}}$/)
   end
 
   def find_words(params = {})

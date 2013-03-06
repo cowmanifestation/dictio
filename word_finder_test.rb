@@ -85,15 +85,16 @@ describe WordFinder do
     end
   end
 
+  # TODO "#at_least" and "#at_most" methods?
   describe "#find_words_longer_than" do
     it "should return all words at least the specified length" do
-      @finder.find_words_longer_than(4).must_equal(%w[cherry apple cheese ache gouache])
+      @finder.find_words_longer_than(3).must_equal(%w[cherry apple cheese ache gouache])
     end
   end
 
   describe "#find_words_shorter_than" do
     it "should return all words of up to specified length" do
-      @finder.find_words_shorter_than(4).must_equal(%w[abc bcd cde def efg arc ache])
+      @finder.find_words_shorter_than(5).must_equal(%w[abc bcd cde def efg arc ache])
     end
   end
 
@@ -104,6 +105,10 @@ describe WordFinder do
 
     it "should work with two supplied parameters" do
       @finder.find_words(containing: 'ca', ending_with: 'he').must_equal(%w[ache gouache])
+    end
+
+    it "should work with three supplied parameters" do
+      @finder.find_words(without: 'e', length: 3, with: 'a').must_equal(%w[buffaloes])
     end
 
     it "should work with 'starting with'" do
@@ -127,6 +132,17 @@ describe WordFinder do
     #   @finder.find_words(without: 'e').must_equal(%w[buffaloes])
     # end
     
+    it "should work with 'length'" do
+      @finder.find_words(length: 3).must_equal(%w[abc bcd cde def efg arc])
+    end
+
+    it "should work with 'longer_than'" do
+      @finder.find_words(longer_than: 3).must_equal(%w[cherry apple cheese ache gouache])
+    end
+
+    it "should work with 'shorter_than'" do
+      @finder.find_words(shorter_than: 5).must_equal(%w[abc bcd cde def efg arc ache])
+    end
   end
 
   ## TODO ##
