@@ -29,10 +29,12 @@ class WordFinder
     list.scan(/\w*#{pattern}$/)
   end
 
-  def find_words_without(pattern, omission, list = self.list)
-    p = self.find_pattern(pattern, list)
-    p.reject {|w| w =~ /#{omission}/ || w.empty? }
-  end
+  # TODO - Fix this when I have access to documentation
+  # def find_words_without(omission, list = self.list) #(pattern, omission, list = self.list)
+  #   list.scan(/^[^(#{omission})]$/)
+  #   # p = self.find_pattern(pattern, list)
+  #   # p.reject {|w| w =~ /#{omission}/ || w.empty? }
+  # end
 
   # There must be a better way to do this:
   # You have to enter a blank options hash in order to enter an alternate list.
