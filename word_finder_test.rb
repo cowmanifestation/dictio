@@ -104,6 +104,26 @@ describe WordFinder do
     it "should work with two supplied parameters" do
       @finder.find_words(containing: 'ca', ending_with: 'he').must_equal(%w[ache gouache])
     end
+
+    it "should work with 'starting with'" do
+      @finder.find_words(:starting_with => 'che').must_equal(%w[cherry cheese])
+    end
+
+    it "should work with 'find_pattern'" do
+      @finder.find_words(pattern: 'he').must_equal(%w[cherry cheese ache gouache])
+    end
+
+    it "should work with 'find_words_containing'" do
+      @finder.find_words(containing: 'ca').must_equal(%w[abc arc ache gouache])
+    end
+
+    it "should work with 'find_words_ending_with'" do
+      @finder.find_words(ending_with: 'e').must_equal(%w[cde apple cheese ache gouache])
+    end
+
+    it "should work with 'find_words_without'" do
+      @finder.find_words(without: 'e').must_equal(%w[buffaloes])
+    end
   end
 
   ## TODO ##
