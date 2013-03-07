@@ -29,14 +29,12 @@ class WordFinder
     list.scan(/\w*#{pattern}$/)
   end
 
-  # TODO - Fix this when I have access to documentation
-  # def find_words_without(omission, list = self.list) #(pattern, omission, list = self.list)
-  #   list.scan(/^[^(#{omission})]$/)
-  #   # p = self.find_pattern(pattern, list)
-  #   # p.reject {|w| w =~ /#{omission}/ || w.empty? }
-  # end
+  def find_words_without(omissions, list = self.list)
+    # This could be improved...
+    list.scan(/^[^#{omissions}\n]*$/).delete_if {|e| e.empty? }
+  end
 
-  def find_words_of_length(l, list = self.list) # options = {},
+  def find_words_of_length(l, list = self.list)
     list.scan(/^\w{#{l}}$/)
   end
 

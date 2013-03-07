@@ -68,16 +68,12 @@ describe WordFinder do
     end
   end
 
-  # TODO - fix this when I have access to documentation
-  # describe '#find_words_without' do
-  #   it "should return all words without specified letter" do
-  #     @finder.find_words_without('c', 'a').must_equal(%w[bcd cde cherry cheese])
-  #   end
-
-  #   it "should work with an empty 'with' pattern" do
-  #     @finder.find_words_without('', 'c').must_equal(%w[def efg apple])
-  #   end
-  # end
+  # TODO - fix this
+  describe '#find_words_without' do
+    it "should return all words without specified letter" do
+      @finder.find_words_without('a').must_equal(%w[bcd cde def efg cherry cheese])
+    end
+  end
 
   describe '#find_words_of_length' do
     it "should return words of the required length" do
@@ -101,18 +97,6 @@ describe WordFinder do
   end
 
   describe '#find_words' do
-    it "should find words with one supplied parameter" do
-      @finder.find_words(:length => 4).must_equal(%w[ache])
-    end
-
-    it "should work with two supplied parameters" do
-      @finder.find_words(containing: 'ca', ending_with: 'he').must_equal(%w[ache gouache])
-    end
-
-    it "should work with three supplied parameters" do
-      @finder.find_words(ending_with: 'c', length: 3, with: 'a').must_equal(%w[abc arc])
-    end
-
     it "should work with 'starting with'" do
       @finder.find_words(:starting_with => 'che').must_equal(%w[cherry cheese])
     end
@@ -129,10 +113,9 @@ describe WordFinder do
       @finder.find_words(ending_with: 'e').must_equal(%w[cde apple cheese ache gouache])
     end
 
-    # TODO - fix this when I have access to documentation
-    # it "should work with 'find_words_without'" do
-    #   @finder.find_words(without: 'e').must_equal(%w[buffaloes])
-    # end
+    it "should work with 'find_words_without'" do
+      @finder.find_words(without: 'e').must_equal(%w[abc bcd arc])
+    end
     
     it "should work with 'length'" do
       @finder.find_words(length: 3).must_equal(%w[abc bcd cde def efg arc])
@@ -145,6 +128,15 @@ describe WordFinder do
     it "should work with 'shorter_than'" do
       @finder.find_words(shorter_than: 5).must_equal(%w[abc bcd cde def efg arc ache])
     end
+    
+    it "should work with two supplied parameters" do
+      @finder.find_words(containing: 'ca', ending_with: 'he').must_equal(%w[ache gouache])
+    end
+
+    it "should work with three supplied parameters" do
+      @finder.find_words(ending_with: 'c', length: 3, with: 'a').must_equal(%w[abc arc])
+    end
+
   end
 
   ## TODO ##
