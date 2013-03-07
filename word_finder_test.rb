@@ -14,6 +14,8 @@ describe WordFinder do
     end
   end
 
+  # TODO What about cases where there is no match??
+  
   describe '#begins_with' do
     describe 'with a letter' do
       it "returns all words that begin with supplied letter" do
@@ -108,7 +110,7 @@ describe WordFinder do
     end
 
     it "should work with three supplied parameters" do
-      @finder.find_words(without: 'e', length: 3, with: 'a').must_equal(%w[buffaloes])
+      @finder.find_words(ending_with: 'c', length: 3, with: 'a').must_equal(%w[abc arc])
     end
 
     it "should work with 'starting with'" do

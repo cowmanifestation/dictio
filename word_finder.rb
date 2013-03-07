@@ -51,14 +51,24 @@ class WordFinder
   end
 
   def find_words(params = {})
-    results = []
-    params.each do |k,v|
-      if results.empty?
-        results << self.send(find_method(k), v, self.list)
-      else
-        results = self.send(find_method(k), v, results.join("\n"))
+    results = self.send(find_method(params.first[0]), params.first[1], self.list)
+    params.delete(params.first[0])
+    
+    if results.empty?
+      return results
+    end
+
+    if params.length > 0
+      params.each do |k,v|
+        res = self.send(find_method(k), v, results.join("\n"))
+        if res.empty?
+          return res
+        else
+          results = res
+        end
       end
     end
+
     results.flatten
   end
 
