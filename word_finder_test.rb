@@ -14,9 +14,7 @@ describe WordFinder do
     end
   end
 
-  # TODO What about cases where there is no match??
-  
-  describe '#begins_with' do
+  describe '#find_words_staring_with' do
     describe 'with a letter' do
       it "returns all words that begin with supplied letter" do
         @finder.find_words_starting_with('c').must_equal(%w[cde cherry cheese])
@@ -30,6 +28,10 @@ describe WordFinder do
     describe 'with a pattern' do
       it 'returns all words starting with supplied pattern' do
         @finder.find_words_starting_with('bc').must_equal(%w[bcd])
+      end
+
+      it "should return nothing if there are no matches" do
+        @finder.find_words_starting_with('xyz').must_equal([])
       end
     end
   end
@@ -66,12 +68,23 @@ describe WordFinder do
     it "should return all words ending with a certain pattern" do
       @finder.find_words_ending_with('he').must_equal(%w[ache gouache])
     end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_words_ending_with('xyz').must_equal([])
+    end
   end
 
-  # TODO - fix this
   describe '#find_words_without' do
     it "should return all words without specified letter" do
       @finder.find_words_without('a').must_equal(%w[bcd cde def efg cherry cheese])
+    end
+
+    it "should work with multiple letters" do
+      @finder.find_words_without('ae').must_equal(%w[bcd])
+    end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_words_without('aec').must_equal([])
     end
   end
 
@@ -81,18 +94,29 @@ describe WordFinder do
       @finder.find_words_of_length(6).must_equal(%w[cherry cheese])
       @finder.find_words_of_length(10).must_equal([])
     end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_words_of_length(15).must_equal([])
+    end
   end
 
-  # TODO "#at_least" and "#at_most" methods?
   describe "#find_words_longer_than" do
     it "should return all words at least the specified length" do
       @finder.find_words_longer_than(3).must_equal(%w[cherry apple cheese ache gouache])
+    end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_words_longer_than(7).must_equal([])
     end
   end
 
   describe "#find_words_shorter_than" do
     it "should return all words of up to specified length" do
       @finder.find_words_shorter_than(5).must_equal(%w[abc bcd cde def efg arc ache])
+    end
+
+    it "should return nothing if there are no matches" do
+      @finder.find_words_shorter_than(3).must_equal([])
     end
   end
 
@@ -140,7 +164,7 @@ describe WordFinder do
   end
 
   ## TODO ##
-  # it "should not return words of more than (?) letters" (only a certain number fit on the board)
+  # "#at_least" and "#at_most" methods
   # it "should return words in order according to length, shortest first"
   # it "should work with the real list"
 end

@@ -30,7 +30,8 @@ class WordFinder
   end
 
   def find_words_without(omissions, list = self.list)
-    # This could be improved...
+    # This may be fine for this situation, 
+    # but it could potentially match far more than is desired.
     list.scan(/^[^#{omissions}\n]*$/).delete_if {|e| e.empty? }
   end
 
