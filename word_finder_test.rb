@@ -120,6 +120,10 @@ describe WordFinder do
     end
   end
 
+  # TODO This really should test all possible combinations of methods.
+  # Maybe there's a better way to do that.
+  # Such as, iterate through a list of the methods?
+  # And generate random letters to use with them?
   describe '#find_words' do
     it "should work with 'starting with'" do
       @finder.find_words(:starting_with => 'che').must_equal(%w[cherry cheese])
